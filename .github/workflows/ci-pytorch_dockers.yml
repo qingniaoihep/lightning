@@ -2,7 +2,7 @@ name: Docker - PyTorch
 
 on:
   push:
-    branches: [master, "release/*"]
+    branches: [master, "release/*", "ci/refactor-docker"]  # FIXME
   pull_request:
     branches: [master, "release/*"]
     paths:
