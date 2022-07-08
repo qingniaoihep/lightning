@@ -21,9 +21,9 @@ on:
   schedule:
     - cron: "0 0 * * *"  # at the end of every day
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref }}
-#   cancel-in-progress: ${{ ! (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/')) }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref }}
+  cancel-in-progress: ${{ ! (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/')) }}
 
 jobs:
   pl:
