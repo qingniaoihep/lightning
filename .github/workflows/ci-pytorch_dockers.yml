@@ -73,15 +73,15 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:base-xla-py${{ matrix.python_version }}-torch${{ matrix.xla_version }}
         timeout-minutes: 60
-      # - uses: ravsamhq/notify-slack-action@v1
-      #   if: failure() && ${{ env.PUSH_TO_HUB }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     notification_title: ${{ format('XLA; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.xla_version) }}
-      #     message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01GD29QCAV>'  # kaushikb11
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: ravsamhq/notify-slack-action@v1
+        if: failure() && ${{ env.PUSH_TO_HUB }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ${{ format('XLA; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.xla_version) }}
+          message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01GD29QCAV>'  # kaushikb11
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   cuda:
     runs-on: ubuntu-20.04
@@ -115,15 +115,15 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:base-cuda-py${{ matrix.python_version }}-torch${{ matrix.pytorch_version }}
         timeout-minutes: 95
-      # - uses: ravsamhq/notify-slack-action@v1
-      #   if: failure() && ${{ env.PUSH_TO_HUB }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     notification_title: ${{ format('CUDA; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
-      #     message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01A5T7EY9M>'  # akihironitta
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: ravsamhq/notify-slack-action@v1
+        if: failure() && ${{ env.PUSH_TO_HUB }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ${{ format('CUDA; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
+          message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01A5T7EY9M>'  # akihironitta
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   conda:
     runs-on: ubuntu-20.04
@@ -154,15 +154,15 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:base-conda-py${{ matrix.python_version }}-torch${{ matrix.pytorch_version }}
         timeout-minutes: 95
-      # - uses: ravsamhq/notify-slack-action@v1
-      #   if: failure() && ${{ env.PUSH_TO_HUB }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     notification_title: ${{ format('Conda; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
-      #     message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01A5T7EY9M>'  # akihironitta
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: ravsamhq/notify-slack-action@v1
+        if: failure() && ${{ env.PUSH_TO_HUB }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ${{ format('Conda; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
+          message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01A5T7EY9M>'  # akihironitta
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   ipu:
     runs-on: ubuntu-20.04
@@ -198,15 +198,15 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:ipu-ci-runner-py${{ matrix.python_version }}
         timeout-minutes: 120
-      # - uses: ravsamhq/notify-slack-action@v1
-      #   if: failure() && ${{ env.PUSH_TO_HUB }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     notification_title: ${{ format('IPU; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
-      #     message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01BULUS2BG>'  # SeanNaren
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: ravsamhq/notify-slack-action@v1
+        if: failure() && ${{ env.PUSH_TO_HUB }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ${{ format('IPU; {0} py{1} for *{2}*', runner.os, matrix.python_version, matrix.pytorch_version) }}
+          message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U01BULUS2BG>'  # SeanNaren
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   hpu:
     runs-on: ubuntu-20.04
@@ -234,12 +234,12 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:hpu-ci-runner-gaudi${{ matrix.gaudi_version }}
         timeout-minutes: 55
-      # - uses: ravsamhq/notify-slack-action@v1
-      #   if: failure() && ${{ env.PUSH_TO_HUB }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     notification_title: ${{ format('HPU; {0} py{1} for *{2}*', runner.os, matrix.gaudi_version, matrix.pytorch_version) }}
-      #     message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U02PV6CL144> <@U0355SJN6HK>'  # arao & Mythravarun N R
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: ravsamhq/notify-slack-action@v1
+        if: failure() && ${{ env.PUSH_TO_HUB }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ${{ format('HPU; {0} py{1} for *{2}*', runner.os, matrix.gaudi_version, matrix.pytorch_version) }}
+          message_format: '{emoji} *{workflow}* {status_message}, see <{run_url}|detail>, cc: <@U02PV6CL144> <@U0355SJN6HK>'  # arao & Mythravarun N R
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
