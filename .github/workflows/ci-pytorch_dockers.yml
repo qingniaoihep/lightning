@@ -234,7 +234,6 @@ jobs:
           push: ${{ env.PUSH_TO_HUB }}
           tags: pytorchlightning/pytorch_lightning:hpu-ci-runner-gaudi${{ matrix.gaudi_version }}
         timeout-minutes: 55
-      - run: echo something failed; exit 1
       - run: echo @akihironitta
         if: failure() && env.PUSH_TO_HUB == 'true'
       # - uses: ravsamhq/notify-slack-action@v1
